@@ -1,0 +1,18 @@
+Handle = BK_Create（）创建一个新的BK对象并返回一个“ handle”以唯一地标识它。 
+Handle = BK_Create（NumVars）使用已经创建的NumVars变量创建一个新的BK对象。
+Handle= BK_Create（NumVars，MaxEdges）预分配最多m个边缘的内存。
+
+BK_SetNeighbors   Set 稀疏的 pairwise connectivity of all sites.
+BK_SetNeighbors（Handle，Weights）确定哪些sites是相邻站点，从而具有加权的Potts交互作用。
+Weights是Double的稀疏NumSites x NumSites矩阵，其中Weights（i，j）> 0表示sitesi和j是具有稀疏的 potential of the given strength的邻居。
+重要信息：由于连接是无向的，因此仅参考权重的上三角区域。最小化之后，当前无法调用SetNeighbors。
+
+BK_GetLabeling检索当前标签。
+BK_GetLabeling（Handle）返回所有标签的列向量。
+
+BK_Minimize通过图形切割计算最佳标签。
+返回所计算标签的能量。
+可以通过BK_GetLabeling检索标签本身。
+
+BK_SetUnary设置单个变量的unary cost。
+K_SetUnary（Handle，Costs）接受2 x NumVars int32矩阵，其中Costs（k，i）是将标签k分配给站点i的cost。
